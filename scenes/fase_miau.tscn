@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cekim6sbqv4l6"]
+
+[ext_resource type="Script" uid="uid://bs1r83y8lh7a5" path="res://scripts/gameplay/fase_miau.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://dj2r71nij3y7v" path="res://scripts/gameplay/cenario.gd" id="2_world"]
+[ext_resource type="Script" uid="uid://dluibqnbm3tn0" path="res://scripts/systems/controle_esp32.gd" id="3_esp32"]
+[ext_resource type="PackedScene" path="res://scenes/mimi.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/hud_miau.tscn" id="5_hud"]
+
+[node name="FaseMiau" type="Node2D" unique_id=1102806126]
+script = ExtResource("1_main")
+
+[node name="Cenario" type="Node2D" parent="." unique_id=1347461268]
+z_index = -10
+script = ExtResource("2_world")
+
+[node name="Galhos" type="Node2D" parent="." unique_id=2100919332]
+
+[node name="ControleESP32" type="Node" parent="." unique_id=1469912140]
+script = ExtResource("3_esp32")
+
+[node name="Mimi" parent="." unique_id=1826289656 instance=ExtResource("4_player")]
+position = Vector2(0, 268)
+
+[node name="HUDMiau" parent="." unique_id=1767400837 instance=ExtResource("5_hud")]
