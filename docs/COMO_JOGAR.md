@@ -49,5 +49,8 @@ Para o controle físico, a proposta é um ESP32 com três botões (esquerda, dir
 - `scripts/ui/`: menu, HUD e telas finais.
 - `scripts/ui/hud_miau.gd`: pulos, tempo, carga do salto e progresso.
 - `scripts/systems/`: áudio e comunicação com o ESP32.
-- `assets/provisorios/`: arte temporária. Sprites do Mario representam Mimi nos menus e na fase, tijolos formam as plataformas, uma moeda marca o objetivo, e nuvens, morros e arbustos compõem os fundos. A interface usa a fonte Pixelify Sans da mesma pasta.
+- `assets/characters/mimi/`: animações de Mimi para parado, salto e queda.
+- `assets/environment/shine_on/`: galhos, folhagem e cantinho de descanso da Mimi, além dos fundos de floresta da fase e das telas.
+- `assets/ui/fonts/`: fonte Pixelify Sans usada na interface.
+- `assets/CREDITS.md`: fontes e licenças dos assets.
 - `docs/`: documentação do projeto.

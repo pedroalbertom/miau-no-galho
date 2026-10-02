@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name HUDMiau
 
-const PIXEL_FONT: FontFile = preload("res://assets/provisorios/Fonts/font.ttf")
+const PIXEL_FONT: FontFile = preload("res://assets/ui/fonts/pixelify_sans.ttf")
 
 var jump_label: Label
 var time_label: Label

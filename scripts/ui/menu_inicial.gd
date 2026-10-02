@@ -1,7 +1,7 @@
 extends Control
 
-const PIXEL_FONT: FontFile = preload("res://assets/provisorios/Fonts/font.ttf")
-const HERO_TEXTURE: Texture2D = preload("res://assets/provisorios/Sprites/Mario_Big_Jump.png")
+const PIXEL_FONT: FontFile = preload("res://assets/ui/fonts/pixelify_sans.ttf")
+const MIMI_SPRITES = preload("res://scripts/gameplay/mimi_sprites.gd")
 
 
 func _ready() -> void:
@@ -10,11 +10,9 @@ func _ready() -> void:
 	var background := FundoPixel.new()
 	add_child(background)
 	background.setup(viewport_size)
-	var hero := Sprite2D.new()
-	hero.texture = HERO_TEXTURE
-	hero.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var hero: AnimatedSprite2D = MIMI_SPRITES.create_sprite(&"jump")
 	hero.position = Vector2(center_x, viewport_size.y * 0.43)
-	hero.scale = Vector2(3.0, 3.0)
+	hero.scale = Vector2(4.0, 4.0)
 	add_child(hero)
 
 	_add_label("MIAU NO GALHO", Vector2(center_x - 360.0, viewport_size.y * 0.16), Vector2(720.0, 80.0), 58, Color("#ffe0a3"))

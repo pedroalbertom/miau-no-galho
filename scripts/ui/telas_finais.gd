@@ -1,8 +1,7 @@
 extends Control
 
-const PIXEL_FONT: FontFile = preload("res://assets/provisorios/Fonts/font.ttf")
-const VICTORY_TEXTURE: Texture2D = preload("res://assets/provisorios/Sprites/Mario_Big_Idle.png")
-const DEFEAT_TEXTURE: Texture2D = preload("res://assets/provisorios/Sprites/Mario_Small_Death.png")
+const PIXEL_FONT: FontFile = preload("res://assets/ui/fonts/pixelify_sans.ttf")
+const MIMI_SPRITES = preload("res://scripts/gameplay/mimi_sprites.gd")
 
 @export var victory := false
 
@@ -13,11 +12,9 @@ func _ready() -> void:
 	var background := FundoPixel.new()
 	add_child(background)
 	background.setup(viewport_size)
-	var character := Sprite2D.new()
-	character.texture = VICTORY_TEXTURE if victory else DEFEAT_TEXTURE
-	character.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var character: AnimatedSprite2D = MIMI_SPRITES.create_sprite(&"idle" if victory else &"death")
 	character.position = Vector2(center_x, viewport_size.y * 0.46)
-	character.scale = Vector2(3.0, 3.0) if victory else Vector2(4.0, 4.0)
+	character.scale = Vector2(4.0, 4.0)
 	add_child(character)
 	var title := "MIMI CHEGOU!" if victory else "MIMI CAIU"
 	_add_label(title, Vector2(center_x - 420.0, viewport_size.y * 0.22), Vector2(840.0, 70.0), 48, Color("#ffe0a3"))

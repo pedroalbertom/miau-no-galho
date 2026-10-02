@@ -1,8 +1,7 @@
 extends CharacterBody2D
 class_name Mimi
 
-const IDLE_TEXTURE: Texture2D = preload("res://assets/provisorios/Sprites/Mario_Big_Idle.png")
-const JUMP_TEXTURE: Texture2D = preload("res://assets/provisorios/Sprites/Mario_Big_Jump.png")
+const MIMI_SPRITES = preload("res://scripts/gameplay/mimi_sprites.gd")
 
 signal charge_changed(amount: float)
 signal jump_started
@@ -10,13 +9,13 @@ signal landed(branch_index: int)
 signal fell
 
 @export_group("Salto")
-@export var min_vertical_power: float = 110.0
-@export var max_vertical_power: float = 500.0
-@export var min_horizontal_power: float = 30.0
-@export var max_horizontal_power: float = 250.0
-@export var max_charge_time := 1.25
-@export var charge_curve_power: float = 1.25
-@export var landing_friction: float = 250.0
+@export var min_vertical_power: float = 320.0
+@export var max_vertical_power: float = 580.0
+@export var min_horizontal_power: float = 65.0
+@export var max_horizontal_power: float = 260.0
+@export var max_charge_time := 1.0
+@export var charge_curve_power: float = 1.0
+@export var landing_friction: float = 1600.0
 @export var fall_limit := 520.0
 @export_group("")
 
@@ -30,13 +29,15 @@ var fall_reported: bool = false
 var last_landed_branch: int = -1
 var esp32_input: Node
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 
 func _ready() -> void:
 	esp32_input = get_tree().current_scene.get_node_or_null("ControleESP32")
 	collision_layer = 1
 	collision_mask = 2
+	sprite.sprite_frames = MIMI_SPRITES.create_frames()
+	sprite.play(&"idle")
 	_update_sprite()
 
 
@@ -128,5 +129,7 @@ func _is_action_down(action_name: String) -> bool:
 
 
 func _update_sprite() -> void:
-	sprite.texture = IDLE_TEXTURE if is_on_floor() else JUMP_TEXTURE
+	var animation_name: StringName = &"idle" if is_on_floor() else &"jump"
+	if sprite.animation != animation_name:
+		sprite.play(animation_name)
 	sprite.flip_h = facing < 0
